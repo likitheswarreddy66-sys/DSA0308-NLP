@@ -1,0 +1,21 @@
+print("Name: S.Likiteshwar Reddy")
+print("Reg No: 192425120 ")
+import re
+def pos_tagger(word):
+    if re.match(r"^[Tt]he$|^[Aa]n?$", word):
+        return "Determiner"
+    elif re.match(r".*ing$", word):
+        return "Verb"
+    elif re.match(r".*ly$", word):
+        return "Adverb"
+    elif re.match(r".*ous$|.*ful$", word):
+        return "Adjective"
+    else:
+        return "Noun"
+
+words = ["The", "playing", "quickly", "beautiful", "student"]
+
+print("Rule-Based POS Tagging:")
+
+for word in words:
+    print(word, ":", pos_tagger(word))
