@@ -1,0 +1,22 @@
+print("Name: S.Likiteshwar Reddy")
+print("Reg No: 192425120 ")
+import random
+tag_probabilities = {
+    "book": {"NN": 0.8, "VB": 0.2},
+    "read": {"VB": 0.7, "NN": 0.3},
+    "the": {"DT": 1.0},
+    "student": {"NN": 1.0}
+}
+def stochastic_tagger(words):
+    result = []
+    for word in words:
+        probabilities = tag_probabilities.get(word.lower(), {"NN": 1.0})
+        tags = list(probabilities.keys())
+        weights = list(probabilities.values())
+        tag = random.choices(tags, weights=weights)[0]
+        result.append((word, tag))
+    return result
+sentence = ["the", "student", "read", "book"]
+print("Stochastic POS Tagging:")
+for word, tag in stochastic_tagger(sentence):
+    print(word, ":", tag)
