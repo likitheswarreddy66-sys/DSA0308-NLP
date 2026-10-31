@@ -1,0 +1,22 @@
+print("Name: S.Likiteshwar Reddy")
+print("Reg No: 192425120")
+def check_string(s):
+    state = 0
+    for ch in s:
+        if ch == 'a':
+            state = 1
+        elif ch == 'b':
+            if state == 1:
+                state = 2
+            else:
+                state = 0
+        else:
+            state = 0
+    if state == 2:
+        print("Accepted")
+    else:
+        print("Rejected")
+s1 = input("Enter a string for the example: ")
+check_string(s1)
+s2 = input("Enter a string for the example: ")
+check_string(s2)
