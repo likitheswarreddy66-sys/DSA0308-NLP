@@ -1,0 +1,11 @@
+print("Name: S.Likiteshwar Reddy")
+print("Reg No: 192425120 ")
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+text = "The student is studying Python programming."
+words = nltk.word_tokenize(text)
+tags = nltk.pos_tag(words)
+print("Part-of-Speech Tags:")
+for word, tag in tags:
+    print(word, ":", tag)
