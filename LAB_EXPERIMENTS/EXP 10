@@ -1,0 +1,20 @@
+print("Name: S.Likiteshwar Reddy")
+print("Reg No: 192425120 ")
+def transformation_tagger(words):
+    tags = []
+    for word in words:
+        if word.lower() in ["the", "a", "an"]:
+            tags.append("DT")
+        else:
+            tags.append("NN")
+    for i in range(len(words)):
+        if words[i].endswith("ing"):
+            tags[i] = "VBG"
+        elif i > 0 and tags[i - 1] == "DT":
+            tags[i] = "NN"
+    return list(zip(words, tags))
+sentence = ["The", "student", "is", "playing", "football"]
+print("Transformation-Based Tagging:")
+result = transformation_tagger(sentence)
+for word, tag in result:
+    print(word, ":", tag)
