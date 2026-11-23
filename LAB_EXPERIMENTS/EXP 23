@@ -1,0 +1,31 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+text = [
+    "Python is a programming language.",
+    "Python is used for software development.",
+    "Software development requires programming."
+]
+
+vectorizer = TfidfVectorizer()
+matrix = vectorizer.fit_transform(text)
+
+scores = []
+
+for i in range(len(text) - 1):
+    score = cosine_similarity(
+        matrix[i], matrix[i + 1]
+    )[0][0]
+    scores.append(score)
+
+average = sum(scores) / len(scores)
+
+print("Coherence Score:", round(average, 3))
+
+if average > 0.1:
+    print("Text is coherent")
+else:
+    print("Text has low coherence")
