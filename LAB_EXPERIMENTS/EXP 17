@@ -1,0 +1,17 @@
+import nltk
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+nltk.download('wordnet')
+
+from nltk.corpus import wordnet
+
+word = "computer"
+
+synsets = wordnet.synsets(word)
+
+print("Synsets of", word)
+
+for syn in synsets:
+    print("Meaning:", syn.definition())
