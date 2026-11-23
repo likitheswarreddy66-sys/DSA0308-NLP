@@ -1,0 +1,26 @@
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+def recognize_dialog(text):
+    text = text.lower()
+
+    if "hello" in text or "hi" in text:
+        return "Greeting"
+    elif "?" in text:
+        return "Question"
+    elif "thank" in text:
+        return "Thanks"
+    elif "bye" in text:
+        return "Farewell"
+    else:
+        return "Statement"
+
+dialog = [
+    "Hello",
+    "How are you?",
+    "Thank you",
+    "Bye"
+]
+
+for sentence in dialog:
+    print(sentence, ":", recognize_dialog(sentence))
