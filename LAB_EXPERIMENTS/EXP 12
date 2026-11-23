@@ -1,0 +1,64 @@
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+print("-" * 40)
+
+grammar = {
+    'S': [['NP', 'VP']],
+    'NP': [['Det', 'N']],
+    'VP': [['V', 'NP']],
+    'Det': [['the'], ['a']],
+    'N': [['cat'], ['dog']],
+    'V': [['chased'], ['saw']]
+}
+
+def earley(sentence):
+    words = sentence.lower().split()
+    n = len(words)
+
+    chart = [set() for _ in range(n + 1)]
+    chart[0].add(('S', ('NP', 'VP'), 0, 0))
+
+    for i in range(n + 1):
+        changed = True
+
+        while changed:
+            changed = False
+
+            for state in list(chart[i]):
+                lhs, rhs, dot, start = state
+
+                if dot < len(rhs):
+                    symbol = rhs[dot]
+
+                    if symbol in grammar:
+                        for rule in grammar[symbol]:
+                            new = (symbol, tuple(rule), 0, i)
+
+                            if new not in chart[i]:
+                                chart[i].add(new)
+                                changed = True
+
+                    elif i < n and words[i] == symbol:
+                        chart[i + 1].add(
+                            (lhs, rhs, dot + 1, start)
+                        )
+
+                else:
+                    for old in list(chart[start]):
+                        a, b, d, s = old
+
+                        if d < len(b) and b[d] == lhs:
+                            new = (a, b, d + 1, s)
+
+                            if new not in chart[i]:
+                                chart[i].add(new)
+                                changed = True
+
+    return ('S', ('NP', 'VP'), 2, 0) in chart[n]
+
+sentence = input("Enter a sentence: ")
+
+if earley(sentence):
+    print("Sentence Accepted by Earley Parser")
+else:
+    print("Sentence Rejected by Earley Parser")
