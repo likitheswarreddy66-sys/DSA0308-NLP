@@ -1,0 +1,19 @@
+import nltk
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+nltk.download('wordnet')
+
+from nltk.wsd import lesk
+
+sentence = "I deposited money in the bank"
+
+meaning = lesk(sentence.split(), 'bank')
+
+print("Word: bank")
+
+if meaning:
+    print("Meaning:", meaning.definition())
+else:
+    print("Meaning not found")
