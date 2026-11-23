@@ -1,0 +1,33 @@
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+print("-" * 40)
+
+grammar = {
+    'Singular': ['he', 'she'],
+    'Plural': ['they', 'we'],
+    'SingularVerb': ['runs', 'eats'],
+    'PluralVerb': ['run', 'eat']
+}
+
+def check_agreement(sentence):
+    words = sentence.lower().split()
+
+    if len(words) != 2:
+        return False
+
+    subject, verb = words
+
+    if subject in grammar['Singular']:
+        return verb in grammar['SingularVerb']
+
+    elif subject in grammar['Plural']:
+        return verb in grammar['PluralVerb']
+
+    return False
+
+sentence = input("Enter a sentence: ")
+
+if check_agreement(sentence):
+    print("Correct Subject-Verb Agreement")
+else:
+    print("Incorrect Subject-Verb Agreement")
