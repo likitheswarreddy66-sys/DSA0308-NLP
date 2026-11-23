@@ -1,0 +1,17 @@
+import spacy
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+nlp = spacy.load("en_core_web_sm")
+
+text = "The intelligent student reads a book."
+
+doc = nlp(text)
+
+print("Noun Phrases and Meanings:")
+
+for chunk in doc.noun_chunks:
+    print("Phrase:", chunk.text)
+    print("Root:", chunk.root.text)
+    print("Meaning:", chunk.root.pos_)
