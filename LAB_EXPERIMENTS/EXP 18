@@ -1,0 +1,20 @@
+import re
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+def parse(expression):
+    pattern = r'([A-Za-z]+)\(([^()]*)\)'
+    matches = re.findall(pattern, expression)
+
+    if matches:
+        print("Logical Expression:", expression)
+
+        for predicate, arguments in matches:
+            print("Predicate:", predicate)
+            print("Arguments:", arguments.split(','))
+    else:
+        print("Invalid Expression")
+
+expression = "Human(John)"
+parse(expression)
