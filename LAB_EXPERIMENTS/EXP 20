@@ -1,0 +1,25 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+
+documents = [
+    "Python is a programming language",
+    "Machine learning uses Python",
+    "Java is a programming language"
+]
+
+query = ["Python programming"]
+
+vectorizer = TfidfVectorizer()
+tfidf = vectorizer.fit_transform(documents + query)
+
+scores = cosine_similarity(tfidf[-1], tfidf[:-1])
+
+print("Document Ranking:")
+
+ranking = scores.flatten().argsort()[::-1]
+
+for i in ranking:
+    print("Document", i + 1, "Score:", round(scores[0][i], 3))
