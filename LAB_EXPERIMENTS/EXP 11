@@ -1,0 +1,40 @@
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+print("-" * 40)
+
+grammar = {
+    'S': [['NP', 'VP']],
+    'NP': [['Det', 'N']],
+    'VP': [['V', 'NP']],
+    'Det': [['the'], ['a']],
+    'N': [['cat'], ['dog']],
+    'V': [['chased'], ['saw']]
+}
+
+def parse(symbol, words, pos):
+    if symbol not in grammar:
+        if pos < len(words) and words[pos] == symbol:
+            return pos + 1
+        return None
+
+    for rule in grammar[symbol]:
+        current = pos
+
+        for item in rule:
+            current = parse(item, words, current)
+            if current is None:
+                break
+
+        if current is not None:
+            return current
+
+    return None
+
+sentence = input("Enter a sentence: ").lower().split()
+
+result = parse('S', sentence, 0)
+
+if result == len(sentence):
+    print("Sentence Accepted")
+else:
+    print("Sentence Rejected")
