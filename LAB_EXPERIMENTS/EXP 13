@@ -1,0 +1,29 @@
+import nltk
+from nltk import CFG
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+print("-" * 40)
+
+grammar = CFG.fromstring("""
+S -> NP VP
+NP -> Det N
+VP -> V NP
+Det -> 'the' | 'a'
+N -> 'cat' | 'dog'
+V -> 'chased'
+""")
+
+sentence = input("Enter a sentence: ").lower().split()
+
+parser = nltk.ChartParser(grammar)
+
+trees = list(parser.parse(sentence))
+
+if trees:
+    print("Parse Tree:")
+    for tree in trees:
+        print(tree)
+        tree.pretty_print()
+else:
+    print("No Parse Tree Found")
