@@ -1,0 +1,29 @@
+import nltk
+from nltk import PCFG
+
+print("Name: S. Likiteshwar Reddy")
+print("Register Number: 192425120")
+print("-" * 40)
+
+grammar = PCFG.fromstring("""
+S -> NP VP [1.0]
+NP -> Det N [0.8] | N [0.2]
+VP -> V NP [1.0]
+Det -> 'the' [0.6] | 'a' [0.4]
+N -> 'cat' [0.5] | 'dog' [0.5]
+V -> 'chased' [1.0]
+""")
+
+sentence = input("Enter a sentence: ").lower().split()
+
+parser = nltk.ViterbiParser(grammar)
+
+trees = list(parser.parse(sentence))
+
+if trees:
+    for tree in trees:
+        print("Parse Tree:")
+        print(tree)
+        print("Probability:", tree.prob())
+else:
+    print("No Valid Parse Found")
